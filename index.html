@@ -47,15 +47,46 @@
         <section id='intro'>
             <div class="middle-block">
                 <img class="fakelazyload" src="img/gabi.png">
-                <div class="texto fakelazyload fadeUp ">
-                    <h1>Meet Miss Schimidt</h1>
-                    <span>Hi! I’m a Brazilian front-end developer who is always seeking out answers and loves working with others to build great products.</span>
+                <div class="texto">
+                    <h1 class="fakelazyload fadeUp">Meet <b>Miss Schimidt</b></h1>
+                    <span class="fakelazyload fadeUp">Hi! I’m a Brazilian front-end developer who is always seeking out answers and loves working with others to build great products.</span>
                 </div>
             </div>
             <a href="#background" class="started">let's get started</a>
         </section>
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Playfair+Display:400,400i,700,700i" rel="stylesheet">
+        <section id="background">
+            <div class="container">
+                <h2>My background</h2>
+                <ul class="content-blocks">
+                    <li>
+                        <div>
+                            <img src="img/columbia.png">
+                            <span>Columbia University</span>
+                        </div>
+                        <span id="hidden-columbia" class="hidden-info">Visiting student through fully funded scholarship</span>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="img/unifil.png" alt="Unifil">
+                            <span>Centro Universitário Filadélfia</span>
+                        </div>
+                        <span id="hidden-unifil" class="hidden-info">Bachelor in Information Systems</span>
+                    </li>
+                </ul>
+
+                <!-- <div id="progress-bar">
+                    <ul>
+                        <li id="login"><span>plenty of intern background</span></li>
+                        <li id="checkout"><span>real New York startup experience</span></li>
+                        <li id="confirmacao" class="current"><span>currently front-end dev for ecommerce</span></li>
+                        <li id="confirmacao" class="current"><span>looking for my next move</span></li>
+                    </ul>       
+                </div> -->
+            </div>
+        </section>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Playfair+Display:400,400i,700,700i|Lato:400i" rel="stylesheet">
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     </body>
 
@@ -68,12 +99,30 @@
 <script type="text/javascript">
   jQuery(window).ready(function (){
 
+    //  trigger animations of first section on page load
     jQuery(".fakelazyload, .fadeDown").addClass('loaded');
+    setTimeout(function(){
+        jQuery('h1 b').addClass('underline');    
+    }, 800);
 
-    var headerHeight = 84;
+    // activating animations for mobile menu
+    jQuery('#menu').click(function(){
+        jQuery(this).toggleClass('active-body')
+        jQuery('header').toggleClass('active-body');
+        jQuery('section').toggleClass('active-body');
+        jQuery('footer').toggleClass('active-body');
+    });
 
     //header nav scroll
-    jQuery("header a").click(function(){
+    var headerHeight = 77;
+    jQuery("header a, .started").click(function(){
+
+        // if in responsive mode, close the menu
+        if( screen.width <= 770 ) {
+            headerHeight = 54;
+            jQuery('#menu, header, section, footer').removeClass('active-body');
+        }
+
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
           var target = jQuery(this.hash);
           target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
@@ -86,13 +135,52 @@
         }
     }); 
 
-    jQuery('#menu').click(function(){
-        jQuery(this).toggleClass('active-body')
-        jQuery('header').toggleClass('active-body');
-        // jQuery('#intro').toggleClass('active-body');
-        jQuery('section').toggleClass('active-body');
-        jQuery('footer').toggleClass('active-body');
+    // animations if page is refreshed
+    if (jQuery('#background').isOnScreen()) {
+        jQuery('.hidden-info').addClass('active');
+    } 
+
+    // scroll animation
+    jQuery(window).scroll(function(){
+        if (jQuery('#background').isOnScreen()) {
+            setTimeout(function(){
+                jQuery('.hidden-info').addClass('active');
+            }, 1200);
+        } 
+
+        if (jQuery('#background').isOnScreen()) {
+            setTimeout(function(){
+                jQuery('.hidden-info').addClass('active');
+            }, 1200);
+        }
     });
 
+
+
+    
+
   });
+
+
+
+    
+
+  jQuery.fn.isOnScreen = function(){
+
+    var win = jQuery(window);
+
+    var viewport = {
+        top : win.scrollTop(),
+        left : win.scrollLeft()
+    };
+    viewport.right = viewport.left + win.width();
+    viewport.bottom = viewport.top + win.height();
+
+    var bounds = this.offset();
+    bounds.right = bounds.left + this.outerWidth();
+    bounds.bottom = bounds.top + this.outerHeight();
+
+    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+};
 </script>
