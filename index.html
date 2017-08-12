@@ -52,12 +52,12 @@
                     <span class="fakelazyload fadeUp">Hi! I’m a Brazilian front-end developer who is always seeking out answers and loves working with others to build great products.</span>
                 </div>
             </div>
-            <a href="#background" class="started">let's get started</a>
+            <a href="#background" class="started fakelazyload">let's get started</a>
         </section>
 
         <section id="background">
-            <div class="container">
-                <h2>My background</h2>
+            <h2>My background</h2>
+            <div class="container middle-block">
                 <ul class="content-blocks">
                     <li>
                         <div>
@@ -74,15 +74,15 @@
                         <span id="hidden-unifil" class="hidden-info">Bachelor in Information Systems</span>
                     </li>
                 </ul>
-
-                <!-- <div id="progress-bar">
+                    
+                <div id="progress-bar">
                     <ul>
                         <li id="login"><span>plenty of intern background</span></li>
                         <li id="checkout"><span>real New York startup experience</span></li>
                         <li id="confirmacao" class="current"><span>currently front-end dev for ecommerce</span></li>
                         <li id="confirmacao" class="current"><span>looking for my next move</span></li>
                     </ul>       
-                </div> -->
+                </div>
             </div>
         </section>
 
@@ -100,10 +100,13 @@
   jQuery(window).ready(function (){
 
     //  trigger animations of first section on page load
-    jQuery(".fakelazyload, .fadeDown").addClass('loaded');
+    jQuery(".middle-block .fakelazyload, .fadeDown").addClass('loaded');
     setTimeout(function(){
-        jQuery('h1 b').addClass('underline');    
+        jQuery('h1 b').addClass('underline');
     }, 800);
+    setTimeout(function(){
+        jQuery("a.fakelazyload").addClass('loaded');
+    }, 1800);
 
     // activating animations for mobile menu
     jQuery('#menu').click(function(){
@@ -137,22 +140,18 @@
 
     // animations if page is refreshed
     if (jQuery('#background').isOnScreen()) {
-        jQuery('.hidden-info').addClass('active');
+        backgroundEffects();
     } 
 
     // scroll animation
     jQuery(window).scroll(function(){
         if (jQuery('#background').isOnScreen()) {
-            setTimeout(function(){
-                jQuery('.hidden-info').addClass('active');
-            }, 1200);
+            backgroundEffects();
         } 
 
-        if (jQuery('#background').isOnScreen()) {
-            setTimeout(function(){
-                jQuery('.hidden-info').addClass('active');
-            }, 1200);
-        }
+        // if (jQuery('#background').isOnScreen()) {
+        //     backgroundEffects();
+        // }
     });
 
 
@@ -162,7 +161,15 @@
   });
 
 
-
+  function backgroundEffects(){
+    setTimeout(function(){
+        jQuery('.hidden-info').addClass('active');
+    }, 1200);
+    
+    jQuery("#progress-bar ul").children().each(function (i){
+        setTimeout(function(){ jQuery("#progress-bar ul li").eq(i).addClass('active');},1000*i);
+    });
+  }
     
 
   jQuery.fn.isOnScreen = function(){

@@ -6,10 +6,11 @@ body{
 	overflow-X: hidden;
     overflow-Y: auto;
     &.active-body{
-    	overflow: auto;
+    	overflow: hidden;
     }
 }
 
+// animation to open mobile menu
 .active-body{
 	@include transform(translate3d(-205px,0,0) !important);
 }
@@ -180,10 +181,7 @@ header{
 	}
 
 	.middle-block{
-		display: table;
-		position: relative;
 		max-width: 800px;
-		@include push-auto();
 		top: 45%;
 		@include translate(0, -45%);
 	}
@@ -210,6 +208,9 @@ header{
 		span{
 			line-height: 1.5;
 			display: block;
+			@include smallmobileview{
+				font-size: 14px;
+			}
 		}
 		@include desktopview{
 			width:calc(100% - 350px);
@@ -248,8 +249,8 @@ header{
         animation-timing-function: ease-in-out;
         color:#949494;
         position: absolute;
-        bottom:5%;
-        left:50%;
+        bottom:8%;
+        left:47%;
         @include translate(-50%,5%);
         background: white;
         border-radius: 5px;
@@ -269,14 +270,13 @@ header{
             @include transform(rotate(45deg) translateX(-50%));
             @include box-shadow(2px 2px 2px 0 rgba(0,0,0,0.2));
         }
-
-        &:active{
-        	bottom:2%;
-        }
         
         @include mobileview{
         	left: 31%;
         }
+        @include smallmobileview{
+			font-size: 14px;
+		}
     }
 
 }
@@ -284,20 +284,16 @@ header{
 #background{
 	background: transparentize($bright-blue, 0.7);
 	@include desktopview{
-		height: calc(100vh - 127px);
+		height: calc(100vh - 175px);
 	}
 	.content-blocks{
-        padding-top: 50px;
         position: relative;
-        @include desktopview{
-            padding-top:100px;
-        }
-
+        
         li{
             margin: 0 40px;
             position: relative;
             @include mobileview{
-            	margin: 0 0 100px 0;
+            	margin: 0 0 80px 0;
             }
             img{
                 width:200px;
@@ -351,114 +347,128 @@ header{
             }
         }
     }
+
+    #progress-bar{
+		display:table;
+		margin: 130px auto 0;
+		@include mobileview{
+			margin-top:30px;
+			// display:none;
+		}
+		ul{
+			margin: 0; 
+			padding: 0;
+			display:table;
+			width: 100%;
+			li{
+				list-style: none;
+				display: inline-block;
+				color: $dull-blue;
+				font-size: 14px;
+				float: left;
+				position:relative;
+				width:25%;
+				@include mobileview{
+					width: 100%;
+				}
+
+				span{
+					height: 40px;
+					display: table;
+					width: 100%;
+					text-align: center;
+					@include desktopview{
+						white-space: nowrap
+					}
+					// dot
+					&:after,&:before{
+						display: table;
+						position:relative;
+						margin: 10px auto 0;
+						content:'';
+						@include border-radius(50%);
+						@include box-shadow(0px 0px 0px 2px $dull-blue, 0 2px 5px rgba(0,0,0,0.7));
+						background-color:  #fff;
+						width: 12px;
+						height: 12px;
+						z-index: 3;
+					}
+					&:before{display: none}
+				}
+
+			    &:after{
+				    content:'';
+				    background-color:  $gray-blue;
+				    width: 100%;
+				    height: 5px;
+				    display:inline-block;
+				    position: relative;
+				    bottom: 18px;
+				    z-index: -1;
+			  	}
+
+			  	// loading effect
+			  	&:before{
+				    content:'';
+				    background-color:  $bright-blue;
+				    width: 0%;
+				    height: 5px;
+				    left:0;
+				    display:inline-block;
+				    position: absolute;
+				    top: 29px;
+				    z-index: 0;
+				    @include transition(1s linear);
+			  	}
+
+			  	// when running
+			  	&.active:before{
+			  		width:100%;
+			  	}
+
+
+			  	// @include desktopview{
+			  		// making odd labels appear bottomline
+				  	&:nth-child(2n+1){
+				  		padding-top: 15px;
+				  		span{
+				  			padding-top: 10px;
+				  		}
+				  		span:before{
+				  			top: -10px;
+				  			display: table;
+				  		}
+				  		span:after{display:none}
+				  		&:after{
+				  			top:-43px;
+				  		}
+				  	}
+				  	
+				  	&:first-child:after,
+					&:first-child:before{
+				  		left: 50%;
+				  	}
+
+					&:first-child:after,
+				  	&:first-child.active:before{
+						width: 50%;
+					}
+					&:last-child:after,
+					&:last-child.active:before{
+						width: 50%;
+					}
+			  		
+			  	// }
+
+			}
+		
+		}
+
+	}
+
 }
 
-#progress-bar{
-  display:table;
-  margin: 40px auto;
-  @include mobileview{
-    display:none;
-  }
-  ul{
-    margin: 0; 
-    padding: 0;
-    display:table;
-    width: 744px;
-    li{
-      list-style: none;
-      display: inline-block;
-      color: $bright-blue;
-      font-size: 14px;
-      font-weight: 700;
-      float: left;
-      position:relative;
-      width:25%;
-      span{
-        height: 40px;
-        display: table;
-        &:after{
-          display: table;
-          position:relative;
-          margin: 10px auto 0;
-          content:'';
-          border-radius: 50%;
-          box-shadow: 0px 0px 0px 2px #fff;
-          background-color:  #fb9f1a;
-          width: 14px;
-          height: 14px;
-          z-index: 3;
-        }
-      }
 
-      &:after{
-        content:'';
-        background-color:  #04b2ca;
-        width: 100%;
-        height: 4px;
-        display:inline-block;
-        position: relative;
-        bottom: 18px;
-        z-index: -1;
-      }
-
-      &.current{
-        color: #ccc;
-        
-      }
-
-    }
-
-    .current{
-      &:before{
-        background: #fb9f1a;
-        background: -webkit-linear-gradient(0deg, #fb9f1a 0%, rgba(251, 159, 26, 0.02) 100%, rgba(251, 159, 26, 0) 51%);
-        background: -moz-linear-gradient(0deg, #fb9f1a 0%, rgba(251, 159, 26, 0.02) 100%, rgba(251, 159, 26, 0) 51%);
-        background: -o-linear-gradient(0deg, #fb9f1a 0%, rgba(251, 159, 26, 0.02) 100%, rgba(251, 159, 26, 0) 51%);
-        background: -ms-linear-gradient(0deg, #fb9f1a 0%, rgba(251, 159, 26, 0.02) 100%, rgba(251, 159, 26, 0) 51%);
-        background: linear-gradient(90deg, #fb9f1a 0%, rgba(251, 159, 26, 0.02) 100%, rgba(251, 159, 26, 0) 51%);
-        z-index: 2;
-        content:'';
-        width: 150%;
-        height: 4px;
-        display:inline-block;
-        position: absolute;
-        bottom: 21px;
-        left:0;
-      }
-    }
-
-    #checkout{
-      span{
-        margin: 0 auto;
-      }
-      &.current:before{
-        background: -webkit-linear-gradient(90deg, rgba(251, 159, 26, 0) 1%, rgba(251, 159, 26, 0.01) 5%, #fb9f1a 30%, rgba(251, 159, 26, 0.99) 70%, rgba(251, 159, 26, 0) 100%);
-        background: -moz-linear-gradient(90deg, rgba(251, 159, 26, 0) 1%, rgba(251, 159, 26, 0.01) 5%, #fb9f1a 30%, rgba(251, 159, 26, 0.99) 70%, rgba(251, 159, 26, 0) 100%);
-        background: -o-linear-gradient(90deg, rgba(251, 159, 26, 0) 1%, rgba(251, 159, 26, 0.01) 5%, #fb9f1a 30%, rgba(251, 159, 26, 0.99) 70%, rgba(251, 159, 26, 0) 100%);
-        background: -ms-linear-gradient(90deg, rgba(251, 159, 26, 0) 1%, rgba(251, 159, 26, 0.01) 5%, #fb9f1a 30%, rgba(251, 159, 26, 0.99) 70%, rgba(251, 159, 26, 0) 100%);
-        background: linear-gradient(90deg, rgba(251, 159, 26, 0) 1%, rgba(251, 159, 26, 0.01) 5%, #fb9f1a 30%, rgba(251, 159, 26, 0.99) 70%, rgba(251, 159, 26, 0) 100%);
-        left:50%;
-        @include translate(-50%,0);
-      }
-    }
-
-    #confirmacao{
-      span{
-        float:right;
-      }
-      &.current:before{
-        background: -webkit-linear-gradient(90deg, rgba(251, 159, 26, 0.02) 0%, #fb9f1a 100%, #fb9f1a 51%);
-        background: -moz-linear-gradient(90deg, rgba(251, 159, 26, 0.02) 0%, #fb9f1a 100%, #fb9f1a 51%);
-        background: -o-linear-gradient(90deg, rgba(251, 159, 26, 0.02) 0%, #fb9f1a 100%, #fb9f1a 51%);
-        background: -ms-linear-gradient(90deg, rgba(251, 159, 26, 0.02) 0%, #fb9f1a 100%, #fb9f1a 51%);
-        background: linear-gradient(90deg, rgba(251, 159, 26, 0.02) 0%, #fb9f1a 100%, #fb9f1a 51%);
-        right: 0;
-        left: auto;
-      }
-    }
-
-  }
-}
 
 // generic code
 
@@ -483,12 +493,25 @@ header{
 }
 
 section{
+	position: relative;
 	padding: 50px 0;
 	h2{
 		text-align: center;
-	    margin: 0 auto 50px;
+	    margin: 0 auto;
 	    width: 100%;
 	    float: left;
+	    @include mobileview{
+	    	margin-bottom: 50px;
+	    }
+	}
+	.middle-block{
+		display: table;
+		position: relative;
+		@include push-auto();
+		@include desktopview{
+			top: 50%;
+			@include translate(0, -50%);
+		}
 	}
 } 
 

@@ -83,6 +83,12 @@ $font-primary: 'Roboto', sans-serif;
           transform-origin: $origin;
 }
 
+@mixin smallmobileview{
+  @media only screen and ( max-width: 350px ){
+    @content;
+  }
+}
+
 @mixin mobileview{
   @media only screen and ( max-width: 769px ){
     @content;
