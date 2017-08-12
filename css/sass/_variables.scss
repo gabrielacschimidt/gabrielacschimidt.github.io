@@ -105,6 +105,33 @@ $font-primary: 'Roboto', sans-serif;
   @include box-shadow(0 2px 5px 0 rgba(0,0,0,0.2));
 }
 
+@mixin triangle($cor:#000, $tamanho:5px, $direcao:'cima') {
+  content: '';
+  width: 0;
+  height: 0 ;
+  
+  @if $direcao == 'cima' {
+    border-right: $tamanho solid transparent;
+    border-left: $tamanho solid transparent;
+    border-bottom: $tamanho solid $cor;
+  }
+  @if $direcao == 'baixo' {
+    border-right: $tamanho solid transparent;
+    border-left: $tamanho solid transparent;
+    border-top: $tamanho solid $cor;
+  }
+  @if $direcao == 'direita'{
+    border-top: $tamanho solid transparent;
+    border-bottom: $tamanho solid transparent;
+    border-left: $tamanho solid $cor;
+  }
+  @if $direcao == 'esquerda'{
+    border-top: $tamanho solid transparent;
+    border-bottom: $tamanho solid transparent;
+    border-right: $tamanho solid $cor;
+  }
+}
+
 /* RESETING AND ENVIRONMENTAL SETTINGS */
 
 a{

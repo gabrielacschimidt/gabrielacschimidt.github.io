@@ -23,8 +23,17 @@
     <header class="fadeDown">
         <div class="container">
             <h2><a href="#intro">GS</a></h2>
+            <div id="menu">
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    
+                </div>
+            </div>
             <nav>
-                <a href="#study">background</a>
+                <a href="#background">background</a>
                 <a href="#learned">skills</a>
                 <a href="#work">work</a>
                 <a href="#contact">contact</a>
@@ -35,7 +44,7 @@
 
     <body>
 
-        <div id='intro'>
+        <section id='intro'>
             <div class="middle-block">
                 <img class="fakelazyload" src="img/gabi.png">
                 <div class="texto fakelazyload fadeUp ">
@@ -43,7 +52,8 @@
                     <span>Hi! I’m a Brazilian front-end developer who is always seeking out answers and loves working with others to build great products.</span>
                 </div>
             </div>
-        </div>
+            <a href="#background" class="started">let's get started</a>
+        </section>
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Playfair+Display:400,400i,700,700i" rel="stylesheet">
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -60,7 +70,6 @@
 
     jQuery(".fakelazyload, .fadeDown").addClass('loaded');
 
-
     var headerHeight = 84;
 
     //header nav scroll
@@ -76,5 +85,14 @@
           }
         }
     }); 
+
+    jQuery('#menu').click(function(){
+        jQuery(this).toggleClass('active-body')
+        jQuery('header').toggleClass('active-body');
+        // jQuery('#intro').toggleClass('active-body');
+        jQuery('section').toggleClass('active-body');
+        jQuery('footer').toggleClass('active-body');
+    });
+
   });
 </script>
