@@ -166,12 +166,54 @@
             </div>
         </section>
 
+        <section id="contact">
+            <div class="map mobile-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58624.49266918992!2d-51.40235578921781!3d-23.314641560168305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94eca79579d8070b%3A0x86c186f3adc758ae!2zUm9sw6JuZGlhLCBQUg!5e0!3m2!1spt-BR!2sbr!4v1501629483758" width="600" height="459" frameborder="0" scrolling="no" allowfullscreen></iframe>
+            </div>
+            <div class="form-wrapper mobile-box">
+                <div class="form"> 
+                    <h3>Hit me up!</h3>                   
+                    <form method="POST" action="http://formspree.io/gabrielacschimidt@hotmail.com">
+                        <div class="input-box">
+                            <label>Name</label>
+                            <input type="text" name="name" title="Write your name" required>
+                        </div>
+                        <div class="input-box">
+                            <label>E-mail</label>
+                            <input type="email" name="email" title="Write your e-mail" required>
+                        </div>
+                        <div class="input-box textarea">
+                            <label>Leave me a message</label>
+                            <textarea name="message" title="Write your sweet message" required></textarea>
+                        </div>
+                        <button type="submit">Send</button>
+                    </form>
+
+                    <p class="currently">Gabriela is currently in:</p>
+                    <p class="icon-location">Rolândia, PR - Brazil</p>
+                    <div class="floating-icons fakelazyload">
+                        <a class="floating linkedin" href="https://www.linkedin.com/in/gabriela-concolin-schimidt-55a54642" target="_blank">
+                            <i class="icon-linkedin"></i>
+                            <span>Connect with me on LinkedIn</span>
+                        </a>
+                        <a class="floating email" href="mailto:gabrielacschimidt@hotmail.com?Subject=Loved%20your%20portfolio%20and%20want%20to%20know%20more!" target="_top"">
+                            <i class="icon-note"></i>
+                            <span>Request my resume</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700|Playfair+Display:400,400i,700,700i|Lato:400i" rel="stylesheet">
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     </body>
 
     <footer>
-        
+        <div class="container">
+            <i class="icon-spock" title="LL&P"></i>
+            <small>2017</small>
+        </div>
     </footer>
 
 </html>
@@ -225,15 +267,37 @@
 
     // scroll animation
     jQuery(window).scroll(function(){
+
+        jQuery(".floating-icons.fakelazyload").addClass('loaded'); 
+
         if (jQuery('#background').isOnScreen()) {
             backgroundEffects();
-        } 
+        }
 
         // if (jQuery('#background').isOnScreen()) {
         //     backgroundEffects();
         // }
     });
 
+    // form effects
+    jQuery(".input-box input, .input-box textarea").focus(function() {
+        jQuery(this).parent(".input-box").each(function() {
+            jQuery(this).find('label').addClass('active');
+        });
+    }).blur(function() {
+        if (jQuery(this).val() == "") {
+            jQuery(this).parent(".input-box").each(function() {
+                jQuery(this).find('label').removeClass('active');
+            });
+        }
+    });
+
+    // in case the form is filled on page load
+    jQuery(".input-box").each(function() {
+        if (jQuery(this).find('input, textarea').val() != "") {
+            jQuery(this).find('label').addClass('active');
+        }
+    });
 
 
     
