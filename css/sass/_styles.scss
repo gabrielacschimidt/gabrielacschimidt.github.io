@@ -360,6 +360,7 @@ header{
 			padding: 0;
 			display:table;
 			width: 100%;
+
 			li{
 				list-style: none;
 				display: inline-block;
@@ -369,15 +370,23 @@ header{
 				position:relative;
 				width:25%;
 				@include mobileview{
-					width: 100%;
+					display: table;
+				    margin: 0 auto;
+				    clear: both;
+				    width: 100%;
+				    float:none;
 				}
+
+
 
 				span{
 					height: 40px;
 					display: table;
 					width: 100%;
-					text-align: center;
+					padding-left: 20px;
 					@include desktopview{
+						padding-left: 0;
+						text-align: center;
 						white-space: nowrap
 					}
 					// dot
@@ -392,6 +401,13 @@ header{
 						width: 12px;
 						height: 12px;
 						z-index: 3;
+
+						@include mobileview{
+							margin: 0;
+						    left: -3px;
+						    top: 0;
+						    position: absolute;
+						}
 					}
 					&:before{display: none}
 				}
@@ -405,6 +421,13 @@ header{
 				    position: relative;
 				    bottom: 18px;
 				    z-index: -1;
+
+				    @include mobileview{
+				    	width: 5px;
+				    	height: 40px;
+				    	position: absolute;
+				    	top: 0;
+				    }
 			  	}
 
 			  	// loading effect
@@ -419,15 +442,32 @@ header{
 				    top: 29px;
 				    z-index: 0;
 				    @include transition(1s linear);
+
+				    @include mobileview{
+				    	width: 5px;
+				    	height: 0;
+    					top:0;
+				    }
 			  	}
 
 			  	// when running
 			  	&.active:before{
 			  		width:100%;
+			  		@include mobileview{
+			  			width:5px !important;
+				    	height: 100% !important;
+				    }
+			  	}
+
+			  	@include mobileview{
+			  		&:last-child:after,
+					&:last-child.active:before{
+						display: none;
+					}
 			  	}
 
 
-			  	// @include desktopview{
+			  	@include desktopview{
 			  		// making odd labels appear bottomline
 				  	&:nth-child(2n+1){
 				  		padding-top: 15px;
@@ -443,7 +483,7 @@ header{
 				  			top:-43px;
 				  		}
 				  	}
-				  	
+
 				  	&:first-child:after,
 					&:first-child:before{
 				  		left: 50%;
@@ -458,12 +498,36 @@ header{
 						width: 50%;
 					}
 			  		
-			  	// }
+			  	}
 
 			}
 		
 		}
 
+	}
+
+	.redirect{
+		float: right;
+	    margin: 20px 20px 0 0;
+	    font-family: Lato, serif;
+	    font-size: 12px;
+	    color: #fff;
+	    text-shadow: 1px 1px 3px rgba(11, 127, 190, 0.65);
+	    @include transition(0.3s ease);
+	    b{
+	    	display: inline-block;
+	    	margin-left: 10px;
+	    	animation-name: swinging;
+	        animation-duration: 2s;
+	        animation-iteration-count: infinite;
+	        animation-timing-function: ease-in-out;
+	    }
+	    &:hover{
+	    	@include transform(translateX(-10px));
+	    }
+	    &:active{
+	    	@include transform(translateX(5px));
+	    }
 	}
 
 }
@@ -544,5 +608,11 @@ section, footer{
 @keyframes floating {
     from { @include translate(0,  0px); }
     65%  { @include translate(0, 10px); }
+    to   { @include translate(0, -0px); }    
+}
+// animação 
+@keyframes swinging {
+    from { @include translate(0, 0px); }
+    65%  { @include translate(5px, 0px); }
     to   { @include translate(0, -0px); }    
 }
