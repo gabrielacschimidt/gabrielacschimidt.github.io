@@ -56,19 +56,22 @@ header{
             display:inline;
             position: relative;
             font-family: "Playfair Display",serif;
-            &:after{
-            	position: absolute;
-            	left: 0;
-            	bottom:-2px;
-            	content:'';
-            	width:0;
-            	height:2px;
-            	background: $bright-blue;
-            	@include transition(0.3s ease); 
-            }
 
-            &:hover:after{
-            	width:100%;
+            @include desktopview{
+	            &:after{
+	            	position: absolute;
+	            	left: 0;
+	            	bottom:-2px;
+	            	content:'';
+	            	width:0;
+	            	height:2px;
+	            	background: $bright-blue;
+	            	@include transition(0.3s ease); 
+	            }
+
+	            &:hover:after{
+	            	width:100%;
+	            }
             }
 
             @include mobileview{
@@ -294,7 +297,7 @@ header{
 }
 
 #background{
-	background: transparentize($bright-blue, 0.7);
+	// background: transparentize($bright-blue, 0.7);
 	@include desktopview{
 		height: calc(100vh - 175px);
 	}
@@ -525,8 +528,10 @@ header{
         font-style: italic;
 		font-weight: 300;
 	    font-size: 12px;
-	    color: #fff;
-	    text-shadow: 1px 1px 3px rgba(11, 127, 190, 0.65);
+	    // color: #fff;
+	    color: $dark-blue;
+	    // text-shadow: 1px 1px 3px rgba(11, 127, 190, 0.65);
+	    text-shadow: 1px 1px 3px rgba(11, 127, 190, 0.4);
 	    @include transition(0.3s ease);
 	    b{
 	    	display: inline-block;
@@ -544,6 +549,105 @@ header{
 	    }
 	}
 
+}
+
+#work{
+	@include desktopview{
+		height: calc(100vh - 175px);
+	}
+
+	img{
+		max-width: 100%;
+	}
+
+	.content-blocks{
+
+		li{
+			width: 300px;
+			max-width:100%;
+			position: relative;
+			overflow: hidden;
+			margin: 30px;
+
+			a{
+			    width: 100%;
+			    height: 100%;
+			    display: table;
+			    position: relative;
+				&:after{
+					content:'learn more';
+					width:auto;
+					background: #f0f0f0;
+					position: absolute;
+					font-size: 11px;
+				    top: -100%;
+    				right: 5px;
+					text-align: left;
+					padding: 5px;
+					@include materialshadow();
+					@include transition(0.3s ease-in-out);
+
+				}
+
+				.infobox{
+					position: absolute;
+					background: transparent;
+					bottom: 0;
+					padding: 5px;
+					text-align: left;
+
+					h4,span{
+						left:5px;
+						display: inline-block;
+						@include transition(0.3s ease-in-out);
+						background: #f0f0f0;
+						padding: 5px;
+						@include materialshadow();
+					}
+
+					h4{
+						font-family: Lato;
+					}
+
+					span{
+						opacity: 0;
+						font-size: 12px;
+						position: absolute;
+						white-space: nowrap;
+						@include translate(0px,300%);
+					}
+
+				}
+
+			}
+
+
+			&:hover{
+				@include transform(scale(1.2));
+				a:after{
+					top: 5px;
+				}
+
+				.infobox{
+					span{
+						opacity: 1;
+						@include translate(0px,-22px);
+					}
+					h4{
+						@include translate(0px,-27px);
+					}
+					&:before{
+    				    bottom: -48px;
+    					left: -38%;
+    				}
+				}
+
+			}
+
+		}
+
+
+	}
 }
 
 #skills{
@@ -795,11 +899,22 @@ section{
 	padding: 50px 0;
 	h2{
 		text-align: center;
-	    margin: 0 auto;
+	    margin: 0 auto 10px;
 	    width: 100%;
 	    float: left;
+	    position: relative;
 	    @include mobileview{
 	    	margin-bottom: 50px;
+	    }
+	    &:after{
+	    	content:'';
+	    	width:30px;
+	    	height: 2px;
+	    	position: absolute;
+	    	left:50%;
+	    	bottom:-15px;
+	    	@include translate(-50%, 0);
+	    	background: $dark-blue;
 	    }
 	}
 	.middle-block{
