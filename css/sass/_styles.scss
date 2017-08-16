@@ -224,7 +224,7 @@ header{
 		@include verticallyaligned();
         width:300px;
         height:300px;
-        margin-right: 50px;
+        margin-right: 40px;
         object-fit: cover;
         border-radius:50%;
         &.loaded{
@@ -611,23 +611,27 @@ header{
 						@include materialshadow();
 					}
 
+                    @include desktopview{
+                        height: 26px;
+                    }
+
 					h4{
 						font-family: Lato;
 						@include mobileview{
-							@include translate(0px,-27px);
+							margin-bottom: 5px;
 						}
 					}
 
 					span{
 						font-size: 12px;
-						position: absolute;
-						white-space: nowrap;
-						opacity: 0;
-						@include translate(0px,300%);
-						@include mobileview{
-							opacity: 1;
-							@include translate(0px,-22px);
-						}
+                        white-space: nowrap;
+						display: block;
+                        @include desktopview{
+                            opacity: 0;
+                            @include translate(0px,300%);
+                            visibility: hidden;
+                        }
+
 					}
 
 				}
@@ -643,6 +647,7 @@ header{
 
 				.infobox{
 					span{
+                        visibility: visible;
 						opacity: 1;
 						@include translate(0px,-22px);
 					}

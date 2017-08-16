@@ -104,6 +104,8 @@ $font-primary: 'Roboto', sans-serif;
   display:inline-block;
   vertical-align: middle;
   float:none;
+  display:-mox-inline-block;
+  *display:inline;
 }
 
 @mixin materialshadow(){
@@ -237,7 +239,10 @@ button, .button{
   }
 }
 @mixin vertically-aligned(){
+  display: -moz-inline-box;
   display: inline-block;
+  zoom: 1;
+  *display: inline;
   vertical-align: middle;
   float:none;
 }
