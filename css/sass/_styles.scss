@@ -742,10 +742,7 @@ header{
     	@include materialshadow();
         .form{
             padding:30px;
-            // @include desktopview{
-            //     padding-right: 20%;
-            // }
-
+            
             .shadow{
             	position: relative;
             	&:after,&:before{
@@ -787,9 +784,14 @@ header{
             input{
                 height: 40px;
             }
+            // cleaning autofill
+			input:-webkit-autofill {
+			    -webkit-box-shadow: 0 0 0 30px #fbfbfb inset;
+			}
             textarea{
-                height: 120px;
-                resize: none;
+                height: 105px;
+			    resize: none;
+			    padding-top: 15px;
             }
             label{
                 color: rgba(142,131,139,0.38);
