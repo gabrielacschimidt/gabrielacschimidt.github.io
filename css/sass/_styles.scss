@@ -568,6 +568,10 @@ header{
 			position: relative;
 			overflow: hidden;
 			margin: 30px;
+			@include mobileview{
+				width: 250px;
+				margin: 20px;
+			}
 
 			a{
 			    width: 100%;
@@ -586,7 +590,9 @@ header{
 					padding: 5px;
 					@include materialshadow();
 					@include transition(0.3s ease-in-out);
-
+					@include mobileview{
+						top: 5px;
+					}
 				}
 
 				.infobox{
@@ -607,14 +613,21 @@ header{
 
 					h4{
 						font-family: Lato;
+						@include mobileview{
+							@include translate(0px,-27px);
+						}
 					}
 
 					span{
-						opacity: 0;
 						font-size: 12px;
 						position: absolute;
 						white-space: nowrap;
+						opacity: 0;
 						@include translate(0px,300%);
+						@include mobileview{
+							opacity: 1;
+							@include translate(0px,-22px);
+						}
 					}
 
 				}
@@ -636,13 +649,10 @@ header{
 					h4{
 						@include translate(0px,-27px);
 					}
-					&:before{
-    				    bottom: -48px;
-    					left: -38%;
-    				}
 				}
 
 			}
+			
 
 		}
 
@@ -687,14 +697,16 @@ header{
 }
 
 #contact{
-    // padding:30px;
     display: table;
-    width: 100%;
     max-width: 800px;
-    margin: 50px auto;
+    @include desktopview{
+    	width: 100%;
+    	margin: 50px auto;
+    	
+    }
     // background-color: transparentize($bright-blue,0.5);
     // box-shadow: 0 2px 5px 0 #8198a7;
-    >div{
+    >.mobile-box{
         width:50%;
         display:inline-block;
         vertical-align: middle;
@@ -713,6 +725,9 @@ header{
     //     }
     // }
     .content-wrapper{
+    	@include mobileview{
+    		margin-bottom: 20px;
+    	}
         h3{
             margin: 0 0 20px;
             text-shadow: 1px 1px 5px #d1edff;
