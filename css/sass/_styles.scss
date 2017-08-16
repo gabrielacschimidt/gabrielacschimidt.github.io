@@ -687,43 +687,77 @@ header{
 }
 
 #contact{
-    padding: 0;
+    // padding:30px;
     display: table;
     width: 100%;
-    background-color: transparentize($bright-blue,0.5);
+    max-width: 800px;
+    margin: 50px auto;
+    // background-color: transparentize($bright-blue,0.5);
+    // box-shadow: 0 2px 5px 0 #8198a7;
     >div{
         width:50%;
         display:inline-block;
         vertical-align: middle;
         float:none;
     }
-    .map{
-        max-height:459px;
-        iframe{
-            width: 100%;
-            pointer-events: none;
-            border:0;
-            margin:0;
+    // .map{
+    //     max-height:459px;
+    //     iframe{
+    //         width: 100%;
+    //         pointer-events: none;
+    //         border:0;
+    //         margin:0;
+    //     }
+    //     @include mobileview{
+    //         height: 200px;
+    //     }
+    // }
+    .content-wrapper{
+        h3{
+            margin: 0 0 20px;
+            text-shadow: 1px 1px 5px #d1edff;
         }
-        @include mobileview{
-            height: 200px;
+        p{
+        	line-height: 2;
+        	text-shadow: 1px 1px 5px #d1edff;
         }
     }
     .form-wrapper{
-        h3{
-            margin: 0 0 20px;
-        }
+    	background-color: transparentize($bright-blue,0.5);
+    	@include materialshadow();
         .form{
             padding:30px;
-            @include desktopview{
-                padding-right: 20%;
+            // @include desktopview{
+            //     padding-right: 20%;
+            // }
+
+            .shadow{
+            	position: relative;
+            	&:after,&:before{
+                	content:'';
+                	width:100px;
+                	height: 30px;
+                	background: transparent;
+                	position: absolute;
+                	bottom:40px;
+                	box-shadow: 0px 43px 10px rgba(0,0,0,0.2);
+                }
+                &:after{
+                	right:0;
+                	@include rotate(5);
+                }
+                &:before{
+                	left: 0;
+                	@include rotate(-5);
+                }
             }
+
             form{
                 background-color: #fbfbfb;
                 padding:10px;
                 z-index: 1;
                 position: relative;
-                box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
+                @include materialshadow();
             }
             input,textarea{
                 border:none;
