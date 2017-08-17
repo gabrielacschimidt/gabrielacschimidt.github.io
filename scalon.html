@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Gabriela Concolin Schimidt is a Brazilian front-end developer who is always seeking out answers and loves working with others to build great products.">
+        <meta name="keywords" content="HTML,CSS,Frontend,UX Design,Freelance,Website,Ecommerce,SASS,Design">
+        <meta name="author" content="Gabriela Concolin Schimidt">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="css/screen.css">
+        <title>Miss Schimidt's Front-end Portfolio</title>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-104141429-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+
+    <header class="fadeDown">
+        <div class="container">
+            <h2><a href="#intro">GS</a></h2>
+            <div id="menu">
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    
+                </div>
+            </div>
+            <nav>
+                <a href="gabrielacschimidt.com/background">background</a>
+                <a href="gabrielacschimidt.com/work">work</a>
+                <a href="gabrielacschimidt.com/skills">skills</a>
+                <a href="gabrielacschimidt.com/contact">contact</a>
+            </nav>
+        </div>
+    </header>
+    <div class="filler"></div>
+
+    <body>
+
+        <div class="container project">
+
+            <div class="img-wrapper">
+                <img class="fakelazyload" src="img/scalon/busca.png">
+                <div class="floating-icons fakelazyload">
+                    <a class="floating" href="gabrielacschimidt.com/vegan-ja" target="_top">
+                        <i class="">></i>
+                        <span>Next: VeganJá</span>
+                    </a>
+                    
+                </div>
+            </div>
+
+
+            <div class="title-project">
+                <h4>Scalon</h4>
+                <p>frontend development</p>
+                <p>mockup translation</p>
+                <p>ecommerce</p>
+            </div>
+
+            <div class="content">
+                <h5></h5>
+                <span>
+                    the layout design was made in an exterior agency and demanded many features that had never been built for other websites of the company.
+                    i worked directly with a backend developer for around a month in order to create these new features for this store, iterating almost every two days in order to interate requests&responses.
+                </span>
+
+                <img src="">gif of the pages turning
+
+                <span>i have learned a lot about javascript during the making of the interactive header on the home page.
+                at first, i had just control of DOM elements simply through jQuery, but that meant making a lot of validations and conditionals everytime an actin was triggered.
+                by creating a JS object, and integrating it to the window variable, I was able to syncronize and control all the actions, cutting down validations and helping me separate what would happen on the desktop version and what happened on the mobile, lighter version.
+                </span>
+
+                <img src="">gif of the carousel 
+
+                <span>another thing I loved building was a carousel of projects.
+                i thought the transition was too blant so I created a fake loading with few jQuery and JS lines of code and CSS to help the user understand and compute the transition to a different set of products.</span>
+
+                <span>Scalon is still in its final stages of development. you can check out the development version here.</span>
+                
+            </div>
+        </div>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300|Playfair+Display:400,700|Lato:300i,400i" rel="stylesheet">
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    </body>
+
+    <footer>
+        <div class="container">
+            <i class="icon-spock" title="LL&P"></i>
+            <small>2017</small>
+        </div>
+    </footer>
+
+</html>
+
+<script type="text/javascript">
+  jQuery(window).ready(function (){
+
+    //  trigger animations of first section on page load
+    jQuery(".middle-block .fakelazyload, .fadeDown").addClass('loaded');
+    setTimeout(function(){
+        jQuery(".fakelazyload").addClass('loaded');
+    }, 1800);
+
+    // activating animations for mobile menu
+    jQuery('#menu').click(function(){
+        jQuery(this).toggleClass('active-body')
+        jQuery('header').toggleClass('active-body');
+        jQuery('section').toggleClass('active-body');
+        jQuery('footer').toggleClass('active-body');
+    });
+
+    //header nav scroll
+    var headerHeight = 77;
+    jQuery("header a, .started").click(function(){
+
+        // if in responsive mode, close the menu
+        if( screen.width <= 770 ) {
+            headerHeight = 54;
+            jQuery('#menu, header, section, footer').removeClass('active-body');
+        }
+
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = jQuery(this.hash);
+          target = target.length ? target : jQuery('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            jQuery('html, body').animate({
+              scrollTop: target.offset().top-headerHeight
+            }, 1000);
+            return false;
+          }
+        }
+    }); 
+
+  });
+
+</script>
